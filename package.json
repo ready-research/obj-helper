@@ -1,0 +1,43 @@
+{
+  "name": "obj-helper",
+  "main": "dist/index.js",
+  "browser": "dist/index.js",
+  "types": "index.d.ts",
+  "version": "1.0.0",
+  "author": "Momen Zalabany",
+  "license": "ISC",
+  "homepage": "https://github.com/alzalabany/obj-helper",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alzalabany/obj-helper"
+  },
+	"funding": "https://github.com/sponsors/alzalabany",
+  "files": [
+		"index.js",
+		"index.d.ts"
+  ],
+  "keywords": [
+		"object",
+		"prop",
+		"property",
+		"dot",
+		"path",
+		"get",
+		"set",
+		"delete",
+		"access",
+		"notation",
+    "dotty",
+    "clone"
+	],
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "benchmark": "^2.1.4",
+    "parcel": "^1.12.4"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production parcel build index.js --no-cache",
+    "serve": "NODE_ENV=development parcel watch ./",
+    "test": "ava index.spec.js"
+  }
+}

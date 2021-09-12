@@ -11,6 +11,8 @@ function getPath (path) {
 function getProp (obj = {}, path = [], defaultValue = undefined, validate = (x) => x === x) {
   const pathArray = getPath(path)
   const key = pathArray.pop()
+  if (isPrototypePolluted(key))
+    return
   console.log(path, pathArray, key)
   try {
     if (path.length === 0 || pathArray.length === 0) {
@@ -38,7 +40,7 @@ function setProp (obj, prop, val, createIfNotExists = true) {
 
   const ref = (createIfNotExists)
     ? path.reduce((c, i) => {
-      if (!c[i] || typeof c[i] !== 'object' || Array.isArray(c[i])) {
+      if (!c[i] || typeof c[i] !== 'object' || Array.isArray(c[i])|| isPrototypePolluted(i)) {
         c[i] = {}
       }
       return c[i]
@@ -79,6 +81,10 @@ function has (obj, path) {
 
 function clone (obj) {
   return JSON.parse(JSON.stringify(obj))
+}
+
+function isPrototypePolluted(key) {
+  return ['__proto__', 'constructor', 'prototype'].includes(key)
 }
 
 module.exports = { get: getProp, set: setProp, has, delete: deleteProp, clone }
